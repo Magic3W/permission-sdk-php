@@ -1,0 +1,18 @@
+{
+    "name": "magic3w/permission-php-sdk",
+    "description": "Allows your application to communicate with a permission server through a simple API",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "César de la Cal Bretschneider",
+            "email": "cesar@magic3w.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "magic3w\\permission\\sdk\\" : "/src/"
+        }
+    },
+    "require": {}
+}
