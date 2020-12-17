@@ -14,5 +14,8 @@
             "magic3w\\permission\\sdk\\" : "/src/"
         }
     },
-    "require": {}
+    "require": {
+        "magic3w/url-reflection": "dev-master",
+        "spitfire/request": "dev-master"
+    }
 }

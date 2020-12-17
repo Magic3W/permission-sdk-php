@@ -1,5 +1,8 @@
 <?php namespace magic3w\permission\sdk;
 
+use magic3w\http\url\reflection\URLReflection;
+use spitfire\io\request\Request;
+
 class Permission
 {
 	
@@ -26,7 +29,7 @@ class Permission
 	 * @return \permission\Passport
 	 */
 	public function access($resources, $identities) {
-		$request = request(sprintf('%s/grant/eval.json?%s', $this->endpoint, http_build_query(['signature' => strval($this->sso->makeSignature($this->appid))])));
+		$request = new Request(sprintf('%s/grant/eval.json', $this->endpoint));
 		$request->post(json_encode(['resources' => array_map(function ($e) { return \Strings::startsWith($e, '@')? $this->namespace . '.' . substr($e, 1) : $e; }, $resources), 'identities' => $identities]));
 		$request->header('Content-type', 'application/json');
 		
