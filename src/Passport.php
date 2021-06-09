@@ -1,40 +1,40 @@
 <?php namespace magic3w\permission\sdk;
 
+use spitfire\collection\Collection;
+
 class Passport
 {
 	
+	/**
+	 * 
+	 * @var Collection
+	 */
 	private $result;
+	
+	/**
+	 *
+	 * @var string
+	 */
 	private $namespace;
 	
-	function __construct($result, $namespace) {
-		$this->result = collect((array)$result);
+	/**
+	 * 
+	 * @param bool[] $result
+	 * @param string $namespace
+	 */
+	public function __construct(array $result, string $namespace) 
+	{
+		$this->result = new Collection($result);
 		$this->namespace = $namespace;
 	}
 	
-	public function slice($which) {
-		$which = (array)$which;
-		$res = [];
-		
-		foreach ($which as $e) { 
-			if (\Strings::startsWith($e, '@')) { $e = $this->namespace . '.' . substr($e, 1); }
-			$res[$e] = $this->result[$e]; 
-		}
-		
-		return new Passport($res, $this->namespace);
+	/**
+	 * 
+	 * @param string $name Name of the query
+	 * @return boolean
+	 */
+	public function result($name) :? bool
+	{
+		return $this->result[$name];
 	}
-	
-	public function optimistic() {
-		$c = $this->result->filter();
-		
-		if ($c->rewind()) { return min($c->toArray()) > 0; }
-		else { return true; }
-	}
-	
-	public function pesimistic() {
-		$c = $this->result->filter();
-		
-		if ($c->rewind()) { return min($c->toArray()) > 0; }
-		else { return false; }
-	}
-	
 }

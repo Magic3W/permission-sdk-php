@@ -2,7 +2,9 @@
     "name": "magic3w/permission-php-sdk",
     "description": "Allows your application to communicate with a permission server through a simple API",
     "type": "library",
-    "license": "MIT",
+	"license": "MIT",
+	"minimum-stability": "dev",
+	"prefer-stable": true,
     "authors": [
         {
             "name": "César de la Cal Bretschneider",
@@ -15,7 +17,20 @@
         }
     },
     "require": {
-        "magic3w/url-reflection": "dev-master",
-        "spitfire/request": "dev-master"
-    }
+        "magic3w/url-reflection": "*",
+        "spitfire/request": "^0.1.2",
+        "spitfire/collection": "^0.1.1",
+        "magic3w/phpauth-sdk-php": "^0.1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*",
+        "phpstan/phpstan": "^0.12.64",
+        "squizlabs/php_codesniffer": "^3.5"
+	},
+	"scripts" : {
+		"test" : [
+			"./vendor/bin/phpstan analyse --level 7 ./src",
+			"./vendor/bin/phpcs ./src"
+		]
+	}
 }
