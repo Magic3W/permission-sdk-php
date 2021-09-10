@@ -1,12 +1,16 @@
 <?php namespace magic3w\permission\sdk;
 
-use Exception;
+use GuzzleHttp\Client;
 use magic3w\http\url\reflection\URLReflection;
-use magic3w\phpauth\sdk\SSO;
-use spitfire\io\request\Request;
 
 class Permission
 {
+	
+	/**
+	 * 
+	 * @var Client
+	 */
+	private $client;
 	
 	/**
 	 *
@@ -28,10 +32,11 @@ class Permission
 	{
 		$reflection = URLReflection::fromURL($endpoint);
 		$protocol = $reflection->getProtocol();
-		$hostname = $reflection->getServer();
+		$hostname = $reflection->getHostname();
 		$port = $reflection->getPort();
 		
 		$this->endpoint  = rtrim($protocol . '://' . $hostname . ':' . $port . $reflection->getPath(), '/');
+		$this->client    = new Client(['base_uri' => $this->endpoint, 'timeout' => 5.0]);
 	}
 	
 	/**
@@ -67,19 +72,21 @@ class Permission
 			return substr($e[0], 0, 1) === '@'? $this->namespace . '.' . substr($e[0], 1) : $e[0]; 
 		}, $query);
 		
-		$encoded = json_encode($mapped);
+		$encoded = json_encode($mapped, JSON_THROW_ON_ERROR);
+				
+		$response = $this->client->request(
+			'POST',
+			'grant/eval.json',
+			[
+				'body' => $encoded,
+				'headers' => [
+					'Content-type' => 'application/json',
+					'Accept' => 'application/json'
+				]
+			]
+		);
 		
-		if ($encoded === false) {
-			throw new Exception('Cannot encode the query');
-		}
-		
-		$request = new Request(sprintf('%s/grant/eval.json', $this->endpoint));
-		$request->post($encoded);
-		$request->header('Content-type', 'application/json');
-		
-		$result = $request->send()->json();
-		
-		return new Passport($result, $this->namespace);
+		return new Passport(json_decode($response->getBody(), false, JSON_THROW_ON_ERROR), $this->namespace);
 	}
 	
 	/**
