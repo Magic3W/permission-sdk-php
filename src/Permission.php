@@ -7,7 +7,7 @@ class Permission
 {
 	
 	/**
-	 * 
+	 *
 	 * @var Client
 	 */
 	private $client;
@@ -25,7 +25,7 @@ class Permission
 	private $namespace;
 	
 	/**
-	 * 
+	 *
 	 * @param string $endpoint
 	 */
 	public function __construct(string $endpoint)
@@ -42,11 +42,11 @@ class Permission
 	/**
 	 * When querying a permission server, you pass an array of queries that you wish
 	 * the server to analyze.
-	 * 
+	 *
 	 * There's generally multiple queries involved since an application usually needs
 	 * to check several access permissions, you always write it like an array of pairs
 	 * of arrays. Something like this:
-	 * 
+	 *
 	 * [
 	 *  'read' => [
 	 *      'resource1.read',
@@ -57,23 +57,23 @@ class Permission
 	 *      ['@id1', ':group', false]
 	 *  ]
 	 * ]
-	 * 
+	 *
 	 * You can then access it like $result->result('edit')
-	 * 
+	 *
 	 * For performance, you should generally look into the options provided by the
 	 * compile method.
-	 * 
+	 *
 	 * @param array<string, array{string, string[]}> $query
 	 * @return \magic3w\permission\sdk\Passport
 	 */
-	public function access($query) 
-	{	
-		$mapped  = array_map(function ($e) { 
-			return substr($e[0], 0, 1) === '@'? $this->namespace . '.' . substr($e[0], 1) : $e[0]; 
+	public function access($query)
+	{
+		$mapped  = array_map(function ($e) {
+			return substr($e[0], 0, 1) === '@'? $this->namespace . '.' . substr($e[0], 1) : $e[0];
 		}, $query);
 		
 		$encoded = json_encode($mapped, JSON_THROW_ON_ERROR);
-				
+		
 		$response = $this->client->request(
 			'POST',
 			'grant/eval.json',
@@ -90,11 +90,11 @@ class Permission
 	}
 	
 	/**
-	 * 
+	 *
 	 * @param string $set
 	 * @return $this
 	 */
-	public function namespace(string $set) 
+	public function namespace(string $set)
 	{
 		$this->namespace = $set;
 		return $this;

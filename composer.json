@@ -1,36 +1,46 @@
 {
-    "name": "magic3w/permission-php-sdk",
-    "description": "Allows your application to communicate with a permission server through a simple API",
-    "type": "library",
+	"name": "magic3w/permission-php-sdk",
+	"description": "Allows your application to communicate with a permission server through a simple API",
+	"type": "library",
 	"license": "MIT",
 	"minimum-stability": "dev",
 	"prefer-stable": true,
-    "authors": [
-        {
-            "name": "César de la Cal Bretschneider",
-            "email": "cesar@magic3w.com"
-        }
-    ],
-    "autoload": {
-        "psr-4": {
-            "magic3w\\permission\\sdk\\" : "/src/"
-        }
-    },
-    "require": {
-        "magic3w/url-reflection": "*",
-        "spitfire/collection": "^0.1.1",
-        "magic3w/phpauth-sdk-php": "^0.2.1",
-        "guzzlehttp/guzzle": "^7.3"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "*",
-        "phpstan/phpstan": "^0.12.64",
-        "squizlabs/php_codesniffer": "^3.5"
+	"authors": [
+		{
+			"name": "César de la Cal Bretschneider",
+			"email": "cesar@magic3w.com"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+			"magic3w\\permission\\sdk\\" : "/src/"
+		}
+	},
+	"require": {
+		"magic3w/url-reflection": "*",
+		"spitfire/collection": "^0.1.1",
+		"magic3w/phpauth-sdk-php": "^0.2.1",
+		"guzzlehttp/guzzle": "^7.3"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "*",
+		"phpstan/phpstan": "^0.12.64",
+		"magic3w/php-coding-standard": "^1.0"
 	},
 	"scripts" : {
 		"test" : [
+			"cp ./vendor/magic3w/php-coding-standard/.phpcs.xml .",
 			"./vendor/bin/phpstan analyse --level 7 ./src",
-			"./vendor/bin/phpcs ./src"
+			"./vendor/bin/phpcs ./src",
+			"XDEBUG_MODE=coverage ./vendor/bin/phpunit tests --coverage-clover /tmp/coverage.xml"
 		]
-	}
+	},
+
+	"repositories":
+	[
+			{
+				"type": "vcs",
+				"url": "https://github.com/Csardelacal/PHP_Codesniffer"
+			}
+	]
 }

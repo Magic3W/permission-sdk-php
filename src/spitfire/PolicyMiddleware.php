@@ -1,5 +1,5 @@
 <?php namespace permission\policy;
-	
+
 use auth\SSOCache;
 use auth\Token;
 use permission\Permission;
@@ -19,11 +19,11 @@ class PolicyMiddleware implements MiddlewareInterface
 	public function after(ContextInterface $context, Response $response = null)
 	{
 	}
-
+	
 	public function before(ContextInterface $context)
 	{
 		if (!($context instanceof Context)) {
-			return; 
+			return;
 		}
 		
 		$session = Session::getInstance();
@@ -39,7 +39,7 @@ class PolicyMiddleware implements MiddlewareInterface
 		}
 		
 		/*
-		 * The idea behind policy is that the application can determine whether a 
+		 * The idea behind policy is that the application can determine whether a
 		 * user has the required privileges to perform a certain operation.
 		 */
 		$sso        = new SSOCache(Environment::get('SSO'));
@@ -69,7 +69,7 @@ class PolicyMiddleware implements MiddlewareInterface
 			}) : null;
 		}
 		
-
+		
 		
 		$controller = $context->controller;
 		$uri = $context->app->getControllerLocator()->getControllerURI($controller);
@@ -85,10 +85,10 @@ class PolicyMiddleware implements MiddlewareInterface
 		if (class_exists($policyclassname)) {
 			$policy = new $policyclassname();
 			if (is_callable([$policy, $context->action . 'Resources'])) {
-				$resources = array_merge($resources, $policy->{$context->action . 'Resources'}(...$context->object)); 
+				$resources = array_merge($resources, $policy->{$context->action . 'Resources'}(...$context->object));
 			}
 			if (is_callable([$policy, $context->action . 'Identities'])) {
-				$resources = array_merge($resources, $policy->{$context->action . 'Identities'}(...$context->object)); 
+				$resources = array_merge($resources, $policy->{$context->action . 'Identities'}(...$context->object));
 			}
 		}
 		

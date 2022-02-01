@@ -6,7 +6,7 @@ class Passport
 {
 	
 	/**
-	 * 
+	 *
 	 * @var Collection
 	 */
 	private $result;
@@ -18,18 +18,18 @@ class Passport
 	private $namespace;
 	
 	/**
-	 * 
+	 *
 	 * @param bool[] $result
 	 * @param string $namespace
 	 */
-	public function __construct(array $result, string $namespace) 
+	public function __construct(array $result, string $namespace)
 	{
 		$this->result = new Collection($result);
 		$this->namespace = $namespace;
 	}
 	
 	/**
-	 * 
+	 *
 	 * @param string $name Name of the query
 	 * @return boolean
 	 */

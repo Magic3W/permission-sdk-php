@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4cc0c9a8d4a084e1a4e4981aee78f992",
+    "content-hash": "1cf334ddb691030a0bae1fafccfaf886",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -724,6 +724,41 @@
                 }
             ],
             "time": "2020-11-10T18:47:58+00:00"
+        },
+        {
+            "name": "magic3w/php-coding-standard",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Magic3W/php-coding-standard.git",
+                "reference": "a8c4094a1c7ec365e4d4d2cbcac8a6157631c54a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Magic3W/php-coding-standard/zipball/a8c4094a1c7ec365e4d4d2cbcac8a6157631c54a",
+                "reference": "a8c4094a1c7ec365e4d4d2cbcac8a6157631c54a",
+                "shasum": ""
+            },
+            "require": {
+                "squizlabs/php_codesniffer": "dev-dev/scope-indent-blank-lines"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "César de la Cal Bretschneider",
+                    "email": "cesar@magic3w.com"
+                }
+            ],
+            "description": "Magic3W Coding standard for PHP projects.",
+            "support": {
+                "issues": "https://github.com/Magic3W/php-coding-standard/issues",
+                "source": "https://github.com/Magic3W/php-coding-standard/tree/1.0.0"
+            },
+            "time": "2022-02-01T12:46:42+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -2626,16 +2661,16 @@
         },
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "3.5.8",
+            "version": "dev-dev/scope-indent-blank-lines",
             "source": {
                 "type": "git",
-                "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "9d583721a7157ee997f235f327de038e7ea6dac4"
+                "url": "https://github.com/Csardelacal/PHP_CodeSniffer.git",
+                "reference": "7a0de8d171488991cda6ac936f4cf6ee3e8bac7b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/9d583721a7157ee997f235f327de038e7ea6dac4",
-                "reference": "9d583721a7157ee997f235f327de038e7ea6dac4",
+                "url": "https://api.github.com/repos/Csardelacal/PHP_CodeSniffer/zipball/7a0de8d171488991cda6ac936f4cf6ee3e8bac7b",
+                "reference": "7a0de8d171488991cda6ac936f4cf6ee3e8bac7b",
                 "shasum": ""
             },
             "require": {
@@ -2657,7 +2692,6 @@
                     "dev-master": "3.x-dev"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -2675,10 +2709,10 @@
             ],
             "support": {
                 "issues": "https://github.com/squizlabs/PHP_CodeSniffer/issues",
-                "source": "https://github.com/squizlabs/PHP_CodeSniffer",
-                "wiki": "https://github.com/squizlabs/PHP_CodeSniffer/wiki"
+                "wiki": "https://github.com/squizlabs/PHP_CodeSniffer/wiki",
+                "source": "https://github.com/squizlabs/PHP_CodeSniffer"
             },
-            "time": "2020-10-23T02:01:07+00:00"
+            "time": "2022-01-20T00:58:22+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -2870,5 +2904,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.2.0"
 }
